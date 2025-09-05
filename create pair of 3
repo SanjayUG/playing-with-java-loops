@@ -1,0 +1,49 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        int arr[] = {1, 2, 343, 43, 1, 43, 4, 9};
+        
+        // make it set of 3;
+        
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        
+        /* 
+        - we took i for index. 
+        - a loop for traversal the array.
+        - we made a empty arraylist.
+        - and count = 0;
+        - And took another loop till count < 3 and the length of arr.
+        - and keep adding the nums
+        - finally adding it to ans.
+        
+        
+        */
+        
+        int i = 0;
+        while(i < arr.length) {
+            ArrayList<Integer> a = new ArrayList<>();
+            int count = 0;
+            while(count < 3 && i < arr.length) {
+                a.add(arr[i]);
+                i++;
+                count++;
+            }
+            
+            ans.add(a);
+           
+        }
+        
+        
+        for(ArrayList<Integer> ar: ans) {
+            for(int a: ar){
+                System.out.print(a + " ");
+            }
+            System.out.println();
+        }
+        
+    }
+}
