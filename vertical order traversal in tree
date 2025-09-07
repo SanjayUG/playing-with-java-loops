@@ -1,0 +1,109 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.HashMap;
+
+
+class Node {
+    int val;
+    Node left, right;
+    
+    Node(int v) {
+        this.val = v;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class Pair {
+    Node node;
+    int col;
+    
+    Pair(Node n, int c) {
+        this.node = n;
+        this.col = c;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        
+        
+       // Level 1
+        Node root = new Node(1);
+
+        // Level 2
+        root.left = new Node(2);
+        root.right = new Node(3);
+
+        // Level 3
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+
+        // Level 4
+        root.left.left.left = new Node(8);
+        root.left.left.right = new Node(9);
+        root.left.right.left = new Node(10);
+        root.left.right.right = new Node(11);
+        root.right.left.left = new Node(12);
+        root.right.left.right = new Node(13);
+        root.right.right.left = new Node(14);
+        root.right.right.right = new Node(15);
+        
+        // ArrayList<ArrayList<Integer>> result = virtOrderBinarySort(root);
+         virtOrderBinarySort(root);
+        
+        // for(ArrayList<Integer> list: result) {
+        //     System.out.print(" " + list + ", ");
+        // }
+        
+    }
+    
+    
+    // public static ArrayList<ArrayList<Integer>> virtOrderBinarySort(Node root) {
+    public static void virtOrderBinarySort(Node root) {
+        
+        Queue<Pair> q = new LinkedList<>();
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        
+        q.offer(new Pair(root, 0));
+        
+        while(!q.isEmpty()) {
+            Pair curr = q.poll();
+            Node n = curr.node;
+            int col = curr.col;
+            
+            map.putIfAbsent(col, new ArrayList());
+            map.get(col).add(n.val);
+            
+            if(n.left != null) {
+                q.offer(new Pair(n.left, col-1));
+            }
+            if(n.right != null) {
+                q.offer(new Pair(n.right, col+1));
+            }
+        }
+        
+        for(HashMap.Entry<Integer, ArrayList<Integer>> entry: map.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+        
+        // ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        
+        // for(ArrayList<Integer> list: map.values()) {
+        //     result.add(list);
+        // }
+        
+        
+        // return result;
+    }
+    
+    
+}
